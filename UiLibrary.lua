@@ -196,7 +196,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			end
 		end)
 		
-		Explorer.CanvasSize = UDim2.new(0, 0, ExplorerListlayout.AbsoluteContentSize.Y, 0)
+		Explorer.CanvasSize = UDim2.new(0, 0, 0, ExplorerListlayout.AbsoluteContentSize.Y)
 
 		local Elements = {}
 
@@ -303,7 +303,7 @@ function ZoneUiLibrary:CreateWindow(options)
 				pcall(options["Callback"])
 			end)
 			
-			Tab.CanvasSize = UDim2.new(0, 0, TabListlayout.AbsoluteContentSize.Y, 0)
+			Tab.CanvasSize = UDim2.new(0, 0, 0, TabListlayout.AbsoluteContentSize.Y)
 		end
 
 		return Elements
