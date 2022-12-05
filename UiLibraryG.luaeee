@@ -338,13 +338,14 @@ function ZoneUiLibrary:CreateWindow(Options)
 			ButtonIcon.Image = "rbxassetid://11751427038"
 
 			ButtonArrow.MouseButton1Down:Connect(function()
-				DescriptionToggled = not DescriptionToggled
 				if DescriptionToggled == true then
+					DescriptionToggled = false
 					game:GetService("TweenService"):Create(Button, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 0, 40)}):Play()
 					game:GetService("TweenService"):Create(ButtonArrowImage, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
 					game:GetService("TweenService"):Create(ButtonBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, 0, 1)}):Play()	
 					game:GetService("TweenService"):Create(ButtonDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()	
 				else
+					DescriptionToggled = true
 					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, math.huge)
 					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, ButtonDescription.TextBounds.Y)
 					game:GetService("TweenService"):Create(Button, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Button.Size.X.Scale, Button.Size.X.Offset, 0, ButtonDescription.TextBounds.Y + 60)}):Play()
@@ -415,8 +416,6 @@ function ZoneUiLibrary:CreateWindow(Options)
 			LabelIcon.Position = UDim2.new(1, -10, 0, 7)
 			LabelIcon.Size = UDim2.new(0, 20, 0, 20)
 			LabelIcon.Image = "rbxassetid://11751508479"
-
-			Tab.CanvasSize = UDim2.new(0, 0, 0, TabListlayout.AbsoluteContentSize.Y)
 
 			local function ChangeTextToNewText(Message)
 				Options["Message"] = Message or Options["Message"]
@@ -546,13 +545,14 @@ function ZoneUiLibrary:CreateWindow(Options)
 			ToggleBar.Size = UDim2.new(0, 0, 0, 1)
 			
 			ToggleArrow.MouseButton1Down:Connect(function()
-				DescriptionToggled = not DescriptionToggled
 				if DescriptionToggled == true then
+					DescriptionToggled = false
 					game:GetService("TweenService"):Create(Toggle, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 0, 40)}):Play()
 					game:GetService("TweenService"):Create(ToggleArrowImage, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
 					game:GetService("TweenService"):Create(ToggleBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, 0, 1)}):Play()	
 					game:GetService("TweenService"):Create(ToggleDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()	
 				else
+					DescriptionToggled = true
 					ToggleDescription.Size = UDim2.new(ToggleDescription.Size.X.Scale, ToggleDescription.Size.X.Offset, 0, math.huge)
 					ToggleDescription.Size = UDim2.new(ToggleDescription.Size.X.Scale, ToggleDescription.Size.X.Offset, 0, ToggleDescription.TextBounds.Y)
 					game:GetService("TweenService"):Create(Toggle, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Toggle.Size.X.Scale, Toggle.Size.X.Offset, 0, ToggleDescription.TextBounds.Y + 60)}):Play()
@@ -563,12 +563,14 @@ function ZoneUiLibrary:CreateWindow(Options)
 			end)
 			
 			local function toggle()
-				Toggled = not Toggled
-				Options["Callback"](Toggled)
 				if Toggled == true then
+					Toggled = false
+					Options["Callback"](Toggled)
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(255, 63, 63)}):Play()
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
 				else
+					Toggle = true
+					Options["Callback"](Toggled)
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(63, 255, 63)}):Play()
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 360}):Play()
 				end
