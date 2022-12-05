@@ -187,8 +187,8 @@ function ZoneUiLibrary:CreateWindow(options)
 			for i,v in pairs(Explorer:GetChildren()) do
 				if v:IsA("TextButton") and v.Name == "TabButton" then
 					game:GetService("TweenService"):Create(v, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1}):Play()
-					game:GetService("TweenService"):Create(v.TabIcon, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(255, 255, 255)}):Play()
-					game:GetService("TweenService"):Create(v.TabTitle, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+					game:GetService("TweenService"):Create(v.TabIcon, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(115, 115, 115)}):Play()
+					game:GetService("TweenService"):Create(v.TabTitle, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(115, 115, 115)}):Play()
 					game:GetService("TweenService"):Create(TabButton, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0}):Play()
 					game:GetService("TweenService"):Create(TabIcon, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 					game:GetService("TweenService"):Create(TabTitle, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()	
