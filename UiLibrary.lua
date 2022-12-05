@@ -1,6 +1,6 @@
 local ZoneUiLibrary = {}
 
-function ZoneUiLibrary:Validate(default, options)
+local function Validate(default, options)
 	options = options or {}
 	for i,v in pairs(default) do
 		if options[i] == nil then
@@ -11,7 +11,7 @@ function ZoneUiLibrary:Validate(default, options)
 end
 
 function ZoneUiLibrary:CreateWindow(options)
-	options = ZoneUiLibrary:Validate({Name = "Zone"}, options or {})
+	options = Validate({Name = "Zone"}, options or {})
 
 	local Zone = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
@@ -109,7 +109,7 @@ function ZoneUiLibrary:CreateWindow(options)
 	local Tabs = {}
 
 	function Tabs:CreateTab(options)
-		options = ZoneUiLibrary:Validate({Name = "Tab Name", Icon = "rbxassetid://11749319400"}, options or {})
+		options = Validate({Name = "Tab Name", Icon = "rbxassetid://11749319400"}, options or {})
 
 		local TabButton = Instance.new("TextButton")
 		local TabIcon = Instance.new("ImageLabel")
@@ -198,7 +198,7 @@ function ZoneUiLibrary:CreateWindow(options)
 		local Elements = {}
 
 		function Elements:CreateButton(options)
-			options = ZoneUiLibrary:Validate({Name = "Button", Description = "No description given."}, options or {})
+			options = Validate({Name = "Button", Description = "No description given."}, options or {})
 
 			local DescriptionToggled = false
 
