@@ -1,4 +1,5 @@
 local ZoneUiLibrary = {}
+local Connections = {}
 
 local function Validate(Default, Options)
 	Options = Options or {}
@@ -115,7 +116,11 @@ function ZoneUiLibrary:CreateWindow(Options)
 	TabHolderPadding.Parent = TabHolder
 	TabHolderPadding.PaddingBottom = UDim.new(0, 10)
 	TabHolderPadding.PaddingTop = UDim.new(0, 10)
-
+	
+	Explorer.ChildAdded:Connect(function()
+		ResizeCanvasSize(Explorer, ExplorerListlayout)
+	end)
+	
 	local Tabs = {}
 
 	function Tabs:CreateTab(Options)
@@ -205,7 +210,11 @@ function ZoneUiLibrary:CreateWindow(Options)
 				end
 			end
 		end)
-
+		
+		Tab.ChildAdded:Connect(function()
+			ResizeCanvasSize(Tab, TabListlayout)
+		end)
+		
 		ResizeCanvasSize(Explorer, ExplorerListlayout)
 
 		local Elements = {}
@@ -319,7 +328,6 @@ function ZoneUiLibrary:CreateWindow(Options)
 					game:GetService("TweenService"):Create(ButtonArrowImage, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 180}):Play()
 					game:GetService("TweenService"):Create(ButtonBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 0, 1)}):Play()
 					game:GetService("TweenService"):Create(ButtonDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()		
-					ResizeCanvasSize(Tab, TabListlayout)	
 				end	
 			end)
 
@@ -338,8 +346,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 				if DescriptionToggled == true then
 					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, math.huge)
 					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, ButtonDescription.TextBounds.Y)
-					game:GetService("TweenService"):Create(Button, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Button.Size.X.Scale, Button.Size.X.Offset, 0, ButtonDescription.TextBounds.Y + 60)}):Play()
-					ResizeCanvasSize(Tab, TabListlayout)	
+					game:GetService("TweenService"):Create(Button, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Button.Size.X.Scale, Button.Size.X.Offset, 0, ButtonDescription.TextBounds.Y + 60)}):Play()	
 				end
 			end
 
@@ -397,7 +404,6 @@ function ZoneUiLibrary:CreateWindow(Options)
 				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, math.huge)
 				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, LabelText.TextBounds.Y)
 				game:GetService("TweenService"):Create(Label, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Label.Size.X.Scale, Label.Size.X.Offset, 0, LabelText.TextBounds.Y + 20)}):Play()
-				ResizeCanvasSize(Tab, TabListlayout)	
 			end
 
 			ChangeTextToNewText()
