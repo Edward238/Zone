@@ -450,7 +450,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 		function Elements:CreateToggle(Options)
 			Options = Validate({Name = "Toggle", Description = "No description given.", State = false, Callback = function() end}, Options or {})
 
-			local Toggled = false
+			local Egg = false
 			local DescriptionToggled = false
 
 			local Toggle = Instance.new("TextButton")
@@ -563,23 +563,23 @@ function ZoneUiLibrary:CreateWindow(Options)
 			end)
 
 			Toggle.MouseButton1Down:Connect(function()
-				if Toggled == true then
-					Toggled = false
-					Options["Callback"](Toggled)
+				if Egg == true then
+					Egg = false
+					Options["Callback"](Egg)
 					ToggleState.Image = "rbxassetid://11599263541"
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(255, 63, 63)}):Play()
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
 				else
-					Toggle = true
-					Options["Callback"](Toggled)
+					Egg = true
+					Options["Callback"](Egg)
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(63, 255, 63)}):Play()
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 360}):Play()
 				end
 			end)
 
 			if Options["State"] == true then
-				Toggle = true
-				Options["Callback"](Toggled)
+				Egg = true
+				Options["Callback"](Egg)
 				ToggleState.Image = "rbxassetid://11752966539"
 				game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(63, 255, 63)}):Play()
 				game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 360}):Play()
