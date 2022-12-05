@@ -195,7 +195,7 @@ function ZoneUiLibrary:CreateWindow(options)
 				end
 			end
 		end)
-		
+
 		Explorer.CanvasSize = UDim2.new(0, 0, 0, ExplorerListlayout.AbsoluteContentSize.Y)
 
 		local Elements = {}
@@ -283,7 +283,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			ButtonDescription.TextSize = 20.000
 			ButtonDescription.TextTransparency = 1.000
 			ButtonDescription.TextWrapped = true
-			
+
 			ButtonIcon.Name = "ButtonIcon"
 			ButtonIcon.Parent = Button
 			ButtonIcon.AnchorPoint = Vector2.new(1, 0)
@@ -303,27 +303,29 @@ function ZoneUiLibrary:CreateWindow(options)
 					game:GetService("TweenService"):Create(ButtonDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()	
 				else
 					DescriptionToggled = true
+					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, math.huge)
+					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, ButtonDescription.TextBounds.Y)
 					game:GetService("TweenService"):Create(Button, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Button.Size.X.Scale, Button.Size.X.Offset, 0, ButtonDescription.TextBounds.Y + 60)}):Play()
 					game:GetService("TweenService"):Create(ButtonArrowImage, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 180}):Play()
 					game:GetService("TweenService"):Create(ButtonBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 0, 1)}):Play()
 					game:GetService("TweenService"):Create(ButtonDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()		
 				end	
 			end)
-			
+
 			Button.MouseButton1Down:Connect(function()
 				pcall(options["Callback"])
 			end)
-			
+
 			Tab.CanvasSize = UDim2.new(0, 0, 0, TabListlayout.AbsoluteContentSize.Y)
 		end
-		
+
 		function Elements:CreateLabel(options) 
 			options = Validate({Message = "No message given."}, options or {})
-			
+
 			local Label = Instance.new("TextButton")
 			local LabelText = Instance.new("TextLabel")
 			local LabelIcon = Instance.new("ImageLabel")
-			
+
 			Label.Name = "Label"
 			Label.Parent = Tab
 			Label.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
@@ -358,26 +360,26 @@ function ZoneUiLibrary:CreateWindow(options)
 			LabelIcon.Position = UDim2.new(1, -10, 0, 7)
 			LabelIcon.Size = UDim2.new(0, 20, 0, 20)
 			LabelIcon.Image = "rbxassetid://11751508479"
-			
+
 			Tab.CanvasSize = UDim2.new(0, 0, 0, TabListlayout.AbsoluteContentSize.Y)
-			
+
 			local function ChangeTextToNewText(Message)
 				options["Message"] = Message or options["Message"]
 				LabelText.Text = options["Message"]
 
-				game:GetService("TweenService"):Create(LabelText, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, math.huge)}):Play()
-				game:GetService("TweenService"):Create(LabelText, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, LabelText.TextBounds.Y)}):Play()
+				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, math.huge)
+				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, LabelText.TextBounds.Y)
 				game:GetService("TweenService"):Create(Label, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Label.Size.X.Scale, Label.Size.X.Offset, 0, LabelText.TextBounds.Y + 20)}):Play()
 			end
-			
+
 			ChangeTextToNewText()
-			
+
 			local LabelProperties = {}
-			
+
 			function LabelProperties:SetText(NewMessage)
 				ChangeTextToNewText(NewMessage)
 			end
-			
+
 			return LabelProperties
 		end
 
