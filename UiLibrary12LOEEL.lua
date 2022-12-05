@@ -21,15 +21,15 @@ local function ResizeCanvasSize(ScrollingFrame, UiListlayout)
 end
 
 function ZoneUiLibrary:CreateWindow(Options)
-	if game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("Zone") then
-		game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("Zone"):Destroy()
+	if game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("Zone") then
+		game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("Zone"):Destroy()
 		for i,v in pairs(getgenv().Connections) do
 			v:Disconnect()
 		end
 	end
 	
-	if game:GetService("CoreGui"):WaitForChild("Zone") then
-		game:GetService("CoreGui"):WaitForChild("Zone"):Destroy()
+	if game:GetService("CoreGui"):FindFirstChild("Zone") then
+		game:GetService("CoreGui"):FindFirstChild("Zone"):Destroy()
 		for i,v in pairs(getgenv().Connections) do
 			v:Disconnect()
 		end
