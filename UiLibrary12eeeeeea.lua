@@ -322,7 +322,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			
 			function ButtonProperties:SetText(NewMessage)
 				options["Description"] = NewMessage or options["Description"]
-				ButtonDescription = options["Description"]
+				ButtonDescription.Text = options["Description"]
 				
 				if DescriptionToggled == true then
 					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, math.huge)
