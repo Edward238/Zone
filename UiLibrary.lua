@@ -195,11 +195,13 @@ function ZoneUiLibrary:CreateWindow(options)
 				end
 			end
 		end)
+		
+		Explorer.CanvasSize = UDim2.new(0, 0, ExplorerListlayout.AbsoluteContentSize.Y, 0)
 
 		local Elements = {}
 
 		function Elements:CreateButton(options)
-			options = Validate({Name = "Button", Description = "No description given."}, options or {})
+			options = Validate({Name = "Button", Description = "No description given.", Callback = function() end}, options or {})
 
 			local DescriptionToggled = false
 
@@ -296,6 +298,12 @@ function ZoneUiLibrary:CreateWindow(options)
 					game:GetService("TweenService"):Create(ButtonDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()		
 				end	
 			end)
+			
+			Button.MouseButton1Down:Connect(function()
+				pcall(options["Callback"])
+			end)
+			
+			Tab.CanvasSize = UDim2.new(0, 0, TabListlayout.AbsoluteContentSize.Y, 0)
 		end
 
 		return Elements
