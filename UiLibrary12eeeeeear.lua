@@ -1,17 +1,27 @@
 local ZoneUiLibrary = {}
 
-local function Validate(default, options)
-	options = options or {}
-	for i,v in pairs(default) do
-		if options[i] == nil then
-			options[i] = v
+local function Validate(Default, Options)
+	Options = Options or {}
+	for i,v in pairs(Default) do
+		if Options[i] == nil then
+			Options[i] = v
 		end
 	end
-	return options
+	return Options
 end
 
-function ZoneUiLibrary:CreateWindow(options)
-	options = Validate({Name = "Zone"}, options or {})
+local function ResizeCanvasSize(ScrollingFrame, UiListlayout)
+	if ScrollingFrame and UiListlayout then
+		if ScrollingFrame:IsA("ScrollingFrame") and UiListlayout:IsA("UIListLayout") then
+			ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, UiListlayout.AbsoluteContentSize.Y)
+		end
+		return
+	end
+	return
+end
+
+function ZoneUiLibrary:CreateWindow(Options)
+	Options = Validate({Name = "Zone"}, Options or {})
 
 	local Zone = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
@@ -71,7 +81,7 @@ function ZoneUiLibrary:CreateWindow(options)
 	SidebarTitle.Position = UDim2.new(0.5, 0, 0, 0)
 	SidebarTitle.Size = UDim2.new(1, -20, 0, 40)
 	SidebarTitle.Font = Enum.Font.Ubuntu
-	SidebarTitle.Text = options["Name"]
+	SidebarTitle.Text = Options["Name"]
 	SidebarTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 	SidebarTitle.TextSize = 30.000
 	SidebarTitle.TextWrapped = true
@@ -108,8 +118,8 @@ function ZoneUiLibrary:CreateWindow(options)
 
 	local Tabs = {}
 
-	function Tabs:CreateTab(options)
-		options = Validate({Name = "Tab Name", Icon = "rbxassetid://11749319400"}, options or {})
+	function Tabs:CreateTab(Options)
+		Options = Validate({Name = "Tab Name", Icon = "rbxassetid://11749319400"}, Options or {})
 
 		local TabButton = Instance.new("TextButton")
 		local TabIcon = Instance.new("ImageLabel")
@@ -138,7 +148,7 @@ function ZoneUiLibrary:CreateWindow(options)
 		TabIcon.BorderSizePixel = 0
 		TabIcon.Position = UDim2.new(0, 20, 0.5, 0)
 		TabIcon.Size = UDim2.new(0, 30, 0, 30)
-		TabIcon.Image = options["Icon"]
+		TabIcon.Image = Options["Icon"]
 		TabIcon.ImageColor3 = Color3.fromRGB(115, 115, 115)
 
 		TabTitle.Name = "TabTitle"
@@ -150,7 +160,7 @@ function ZoneUiLibrary:CreateWindow(options)
 		TabTitle.Position = UDim2.new(1, -5, 0.5, 0)
 		TabTitle.Size = UDim2.new(0.75, 0, 1, -10)
 		TabTitle.Font = Enum.Font.Ubuntu
-		TabTitle.Text = options["Name"]
+		TabTitle.Text = Options["Name"]
 		TabTitle.TextColor3 = Color3.fromRGB(115, 115, 115)
 		TabTitle.TextSize = 15.000
 		TabTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -196,12 +206,12 @@ function ZoneUiLibrary:CreateWindow(options)
 			end
 		end)
 
-		Explorer.CanvasSize = UDim2.new(0, 0, 0, ExplorerListlayout.AbsoluteContentSize.Y)
+		ResizeCanvasSize(Explorer, ExplorerListlayout)
 
 		local Elements = {}
 
-		function Elements:CreateButton(options)
-			options = Validate({Name = "Button", Description = "No description given.", Callback = function() end}, options or {})
+		function Elements:CreateButton(Options)
+			Options = Validate({Name = "Button", Description = "No description given.", Callback = function() end}, Options or {})
 
 			local DescriptionToggled = false
 
@@ -232,7 +242,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			ButtonTitle.Position = UDim2.new(0, 10, 0, 10)
 			ButtonTitle.Size = UDim2.new(0.5, 160, 0, 20)
 			ButtonTitle.Font = Enum.Font.Ubuntu
-			ButtonTitle.Text = options["Name"]
+			ButtonTitle.Text = Options["Name"]
 			ButtonTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			ButtonTitle.TextSize = 14.000
 			ButtonTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -278,7 +288,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			ButtonDescription.Position = UDim2.new(0.5, 0, 1, -10)
 			ButtonDescription.Size = UDim2.new(1, -20, 0.5, 0)
 			ButtonDescription.Font = Enum.Font.Ubuntu
-			ButtonDescription.Text = options["Description"]
+			ButtonDescription.Text = Options["Description"]
 			ButtonDescription.TextColor3 = Color3.fromRGB(168, 168, 168)
 			ButtonDescription.TextSize = 20.000
 			ButtonDescription.TextTransparency = 1.000
@@ -313,29 +323,30 @@ function ZoneUiLibrary:CreateWindow(options)
 			end)
 
 			Button.MouseButton1Down:Connect(function()
-				pcall(options["Callback"])
+				pcall(Options["Callback"])
 			end)
 
-			Tab.CanvasSize = UDim2.new(0, 0, 0, TabListlayout.AbsoluteContentSize.Y)
-			
+			ResizeCanvasSize(Tab, TabListlayout)
+
 			local ButtonProperties = {}
-			
+
 			function ButtonProperties:SetText(NewMessage)
-				options["Description"] = NewMessage or options["Description"]
-				ButtonDescription.Text = options["Description"]
-				
+				Options["Description"] = NewMessage or Options["Description"]
+				ButtonDescription.Text = Options["Description"]
+
 				if DescriptionToggled == true then
 					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, math.huge)
 					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, ButtonDescription.TextBounds.Y)
 					game:GetService("TweenService"):Create(Button, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Button.Size.X.Scale, Button.Size.X.Offset, 0, ButtonDescription.TextBounds.Y + 60)}):Play()
+					ResizeCanvasSize(Tab, TabListlayout)	
 				end
 			end
-			
+
 			return ButtonProperties
 		end
 
-		function Elements:CreateLabel(options) 
-			options = Validate({Message = "No message given."}, options or {})
+		function Elements:CreateLabel(Options) 
+			Options = Validate({Message = "No message given."}, Options or {})
 
 			local Label = Instance.new("TextButton")
 			local LabelText = Instance.new("TextLabel")
@@ -360,7 +371,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			LabelText.Position = UDim2.new(0, 10, 0, 10)
 			LabelText.Size = UDim2.new(0.5, 180, 0, 20)
 			LabelText.Font = Enum.Font.Ubuntu
-			LabelText.Text = options["Message"]
+			LabelText.Text = Options["Message"]
 			LabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
 			LabelText.TextSize = 14.000
 			LabelText.TextWrapped = true
@@ -379,12 +390,13 @@ function ZoneUiLibrary:CreateWindow(options)
 			Tab.CanvasSize = UDim2.new(0, 0, 0, TabListlayout.AbsoluteContentSize.Y)
 
 			local function ChangeTextToNewText(Message)
-				options["Message"] = Message or options["Message"]
-				LabelText.Text = options["Message"]
+				Options["Message"] = Message or Options["Message"]
+				LabelText.Text = Options["Message"]
 
 				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, math.huge)
 				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, LabelText.TextBounds.Y)
 				game:GetService("TweenService"):Create(Label, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Label.Size.X.Scale, Label.Size.X.Offset, 0, LabelText.TextBounds.Y + 20)}):Play()
+				ResizeCanvasSize(Tab, TabListlayout)	
 			end
 
 			ChangeTextToNewText()
