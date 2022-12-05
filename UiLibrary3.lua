@@ -316,6 +316,64 @@ function ZoneUiLibrary:CreateWindow(options)
 			
 			Tab.CanvasSize = UDim2.new(0, 0, 0, TabListlayout.AbsoluteContentSize.Y)
 		end
+		
+		function Elements:CreateLabel(options) 
+			options = Validate({Message = "No message given."}, options or {})
+			
+			local Label = Instance.new("TextButton")
+			local LabelText = Instance.new("TextLabel")
+			local LabelIcon = Instance.new("ImageLabel")
+			
+			Label.Name = "Label"
+			Label.Parent = Tab
+			Label.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+			Label.BorderSizePixel = 0
+			Label.Size = UDim2.new(1, 0, 0, 40)
+			Label.AutoButtonColor = false
+			Label.Font = Enum.Font.SourceSans
+			Label.Text = ""
+			Label.TextColor3 = Color3.fromRGB(0, 0, 0)
+			Label.TextSize = 14.000
+
+			LabelText.Name = "LabelText"
+			LabelText.Parent = Label
+			LabelText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			LabelText.BackgroundTransparency = 1.000
+			LabelText.BorderSizePixel = 0
+			LabelText.Position = UDim2.new(0, 10, 0, 10)
+			LabelText.Size = UDim2.new(0.5, 180, 0, 20)
+			LabelText.Font = Enum.Font.Ubuntu
+			LabelText.Text = options["Message"]
+			LabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
+			LabelText.TextSize = 14.000
+			LabelText.TextXAlignment = Enum.TextXAlignment.Left
+
+			LabelIcon.Name = "LabelIcon"
+			LabelIcon.Parent = Label
+			LabelIcon.AnchorPoint = Vector2.new(1, 0)
+			LabelIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			LabelIcon.BackgroundTransparency = 1.000
+			LabelIcon.BorderSizePixel = 0
+			LabelIcon.Position = UDim2.new(1, -10, 0, 10)
+			LabelIcon.Size = UDim2.new(0, 20, 0, 20)
+			LabelIcon.Image = "rbxassetid://11751508479"
+			
+			Tab.CanvasSize = UDim2.new(0, 0, 0, TabListlayout.AbsoluteContentSize.Y)
+			
+			local LabelProperties = {}
+			
+			function LabelProperties:SetText(NewMessage)
+				options["Message"] = NewMessage or options["Message"]
+				LabelText.Text = options["Message"]
+
+				game:GetService("TweenService"):Create(LabelText, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, math.huge)}):Play()
+				game:GetService("TweenService"):Create(Label, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Label.Size.X.Scale, Label.Size.X.Offset, 0, LabelText.TextBounds.Y + 20)}):Play()
+			end
+			
+			LabelProperties:SetText()
+			
+			return LabelProperties
+		end
 
 		return Elements
 	end
