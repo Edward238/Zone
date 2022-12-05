@@ -211,6 +211,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			local ButtonArrowImage = Instance.new("ImageLabel")
 			local ButtonBar = Instance.new("Frame")
 			local ButtonDescription = Instance.new("TextLabel")
+			local ButtonIcon = Instance.new("ImageLabel")
 
 			Button.Name = "Button"
 			Button.Parent = Tab
@@ -282,6 +283,16 @@ function ZoneUiLibrary:CreateWindow(options)
 			ButtonDescription.TextSize = 20.000
 			ButtonDescription.TextTransparency = 1.000
 			ButtonDescription.TextWrapped = true
+			
+			ButtonIcon.Name = "ButtonIcon"
+			ButtonIcon.Parent = Button
+			ButtonIcon.AnchorPoint = Vector2.new(1, 0)
+			ButtonIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ButtonIcon.BackgroundTransparency = 1.000
+			ButtonIcon.BorderSizePixel = 0
+			ButtonIcon.Position = UDim2.new(1, -40, 0, 10)
+			ButtonIcon.Size = UDim2.new(0, 20, 0, 20)
+			ButtonIcon.Image = "rbxassetid://11751427038"
 
 			ButtonArrow.MouseButton1Down:Connect(function()
 				if DescriptionToggled then
