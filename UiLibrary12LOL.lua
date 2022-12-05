@@ -117,7 +117,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 	TabHolderPadding.PaddingBottom = UDim.new(0, 10)
 	TabHolderPadding.PaddingTop = UDim.new(0, 10)
 	
-	Explorer.ChildAdded:Connect(function()
+	Connections[#Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
 		ResizeCanvasSize(Explorer, ExplorerListlayout)
 	end)
 	
@@ -211,11 +211,9 @@ function ZoneUiLibrary:CreateWindow(Options)
 			end
 		end)
 		
-		Tab.ChildAdded:Connect(function()
+		Connections[#Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
 			ResizeCanvasSize(Tab, TabListlayout)
 		end)
-		
-		ResizeCanvasSize(Explorer, ExplorerListlayout)
 
 		local Elements = {}
 
@@ -334,8 +332,6 @@ function ZoneUiLibrary:CreateWindow(Options)
 			Button.MouseButton1Down:Connect(function()
 				pcall(Options["Callback"])
 			end)
-
-			ResizeCanvasSize(Tab, TabListlayout)
 
 			local ButtonProperties = {}
 
