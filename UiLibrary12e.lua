@@ -230,7 +230,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			ButtonTitle.BackgroundTransparency = 1.000
 			ButtonTitle.BorderSizePixel = 0
 			ButtonTitle.Position = UDim2.new(0, 10, 0, 10)
-			ButtonTitle.Size = UDim2.new(0.5, 175, 0, 20)
+			ButtonTitle.Size = UDim2.new(0.5, 160, 0, 20)
 			ButtonTitle.Font = Enum.Font.Ubuntu
 			ButtonTitle.Text = options["Name"]
 			ButtonTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -366,7 +366,7 @@ function ZoneUiLibrary:CreateWindow(options)
 
 				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, math.huge)
 				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, LabelText.TextBounds.Y)
-				game:GetService("TweenService"):Create(Label, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Label.Size.X.Scale, Label.Size.X.Offset, 0, LabelText.TextBounds.Y + 20)}):Play()
+				--game:GetService("TweenService"):Create(Label, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Label.Size.X.Scale, Label.Size.X.Offset, 0, LabelText.TextBounds.Y + 20)}):Play()
 			end
 			
 			ChangeTextToNewText()
