@@ -134,7 +134,8 @@ function ZoneUiLibrary:CreateWindow(Options)
 	TabHolderPadding.PaddingTop = UDim.new(0, 10)
 	
 	getgenv().Connections[#getgenv().Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
-		if Zone == nil then
+		if not game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("Zone") and not game:GetService("CoreGui"):FindFirstChild("Zone") then
+			Zone:Destroy()
 			for i,v in pairs(getgenv().Connections) do
 				v:Disconnect()
 			end
