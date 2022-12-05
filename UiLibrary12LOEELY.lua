@@ -438,6 +438,145 @@ function ZoneUiLibrary:CreateWindow(Options)
 
 			return LabelProperties
 		end
+		
+		function Elements:CreateSeperator()
+			local Frame = Instance.new("Frame")
+			
+			Frame.Name = "Frame"
+			Frame.Parent = Tab
+			Frame.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+			Frame.BorderSizePixel = 0
+			Frame.Size = UDim2.new(1, 0, 0, 20)
+		end
+		
+		function Elements:CreateToggle(Options)
+			Options = Validate({Name = "Toggle", Description = "No description given.", State = false, Callback = function() end}, Options or {})
+			
+			local Toggled = false
+			local DescriptionToggled = false
+			
+			local Toggle = Instance.new("TextButton")
+			local ToggleTitle = Instance.new("TextLabel")
+			local ToggleArrow = Instance.new("TextButton")
+			local ToggleArrowImage = Instance.new("ImageLabel")
+			local ToggleState = Instance.new("ImageLabel")
+			local ToggleDescription = Instance.new("TextLabel")
+			local ToggleBar = Instance.new("Frame")
+			
+			Toggle.Name = "Toggle"
+			Toggle.Parent = game.StarterGui.Zone.Main.TabHolder.Tab
+			Toggle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+			Toggle.BorderSizePixel = 0
+			Toggle.Size = UDim2.new(1, 0, 0, 40)
+			Toggle.AutoButtonColor = false
+			Toggle.Font = Enum.Font.SourceSans
+			Toggle.Text = ""
+			Toggle.TextColor3 = Color3.fromRGB(0, 0, 0)
+			Toggle.TextSize = 14.000
+
+			ToggleTitle.Name = "ToggleTitle"
+			ToggleTitle.Parent = Toggle
+			ToggleTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleTitle.BackgroundTransparency = 1.000
+			ToggleTitle.BorderSizePixel = 0
+			ToggleTitle.Position = UDim2.new(0, 10, 0, 10)
+			ToggleTitle.Size = UDim2.new(0.5, 100, 0, 20)
+			ToggleTitle.Font = Enum.Font.Ubuntu
+			ToggleTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleTitle.TextSize = 14.000
+			ToggleTitle.TextWrapped = true
+			ToggleTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+			ToggleArrow.Name = "ToggleArrow"
+			ToggleArrow.Parent = Toggle
+			ToggleArrow.AnchorPoint = Vector2.new(1, 0)
+			ToggleArrow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleArrow.BackgroundTransparency = 1.000
+			ToggleArrow.BorderSizePixel = 0
+			ToggleArrow.Position = UDim2.new(1, -5, 0, 5)
+			ToggleArrow.Size = UDim2.new(0, 30, 0, 30)
+			ToggleArrow.AutoButtonColor = false
+			ToggleArrow.Font = Enum.Font.SourceSans
+			ToggleArrow.Text = ""
+			ToggleArrow.TextColor3 = Color3.fromRGB(0, 0, 0)
+			ToggleArrow.TextSize = 14.000
+
+			ToggleArrowImage.Name = "ToggleArrowImage"
+			ToggleArrowImage.Parent = ToggleArrow
+			ToggleArrowImage.AnchorPoint = Vector2.new(0.5, 0.5)
+			ToggleArrowImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleArrowImage.BackgroundTransparency = 1.000
+			ToggleArrowImage.BorderSizePixel = 0
+			ToggleArrowImage.Position = UDim2.new(0.5, 0, 0.5, 0)
+			ToggleArrowImage.Size = UDim2.new(0, 20, 0, 20)
+			ToggleArrowImage.Image = "rbxassetid://11750627572"
+
+			ToggleState.Name = "ToggleState"
+			ToggleState.Parent = Toggle
+			ToggleState.AnchorPoint = Vector2.new(1, 0)
+			ToggleState.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleState.BackgroundTransparency = 1.000
+			ToggleState.BorderSizePixel = 0
+			ToggleState.Position = UDim2.new(1, -40, 0, 10)
+			ToggleState.Size = UDim2.new(0, 20, 0, 20)
+			ToggleState.Image = "rbxassetid://11599263541"
+			ToggleState.ImageColor3 = Color3.fromRGB(255, 63, 63)
+
+			ToggleDescription.Name = "ToggleDescription"
+			ToggleDescription.Parent = Toggle
+			ToggleDescription.AnchorPoint = Vector2.new(0.5, 1)
+			ToggleDescription.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleDescription.BackgroundTransparency = 1.000
+			ToggleDescription.BorderSizePixel = 0
+			ToggleDescription.Position = UDim2.new(0.5, 0, 1, -10)
+			ToggleDescription.Size = UDim2.new(1, -20, 0.5, 0)
+			ToggleDescription.Font = Enum.Font.Ubuntu
+			ToggleDescription.Text = "No description given."
+			ToggleDescription.TextColor3 = Color3.fromRGB(168, 168, 168)
+			ToggleDescription.TextSize = 20.000
+			ToggleDescription.TextTransparency = 1.000
+			ToggleDescription.TextWrapped = true
+
+			ToggleBar.Name = "ToggleBar"
+			ToggleBar.Parent = Toggle
+			ToggleBar.AnchorPoint = Vector2.new(0.5, 1)
+			ToggleBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleBar.BorderSizePixel = 0
+			ToggleBar.Position = UDim2.new(0.5, 0, 1, 0)
+			ToggleBar.Size = UDim2.new(0, 0, 0, 1)
+			
+			ToggleArrow.MouseButton1Down:Connect(function()
+				if DescriptionToggled then
+					DescriptionToggled = false
+					game:GetService("TweenService"):Create(Toggle, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 0, 40)}):Play()
+					game:GetService("TweenService"):Create(ToggleArrowImage, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
+					game:GetService("TweenService"):Create(ToggleBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, 0, 1)}):Play()	
+					game:GetService("TweenService"):Create(ToggleDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()	
+				else
+					DescriptionToggled = true
+					ToggleDescription.Size = UDim2.new(ToggleDescription.Size.X.Scale, ToggleDescription.Size.X.Offset, 0, math.huge)
+					ToggleDescription.Size = UDim2.new(ToggleDescription.Size.X.Scale, ToggleDescription.Size.X.Offset, 0, ToggleDescription.TextBounds.Y)
+					game:GetService("TweenService"):Create(Toggle, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Toggle.Size.X.Scale, Toggle.Size.X.Offset, 0, ToggleDescription.TextBounds.Y + 60)}):Play()
+					game:GetService("TweenService"):Create(ToggleArrowImage, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 180}):Play()
+					game:GetService("TweenService"):Create(ToggleBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 0, 1)}):Play()
+					game:GetService("TweenService"):Create(ToggleDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()		
+				end	
+			end)
+			
+			Toggle.MouseButton1Down:Connect(function()
+				if Toggled then
+					Toggled = false
+					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(255, 63, 63)}):Play()
+					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
+				else
+					Toggled = true
+					pcall(Options["Callback"], Toggled)
+					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(63, 255, 63)}):Play()
+					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 360}):Play()
+				end
+			end)
+			
+		end
 
 		return Elements
 	end
