@@ -303,7 +303,7 @@ function ZoneUiLibrary:CreateWindow(options)
 					game:GetService("TweenService"):Create(ButtonDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()	
 				else
 					DescriptionToggled = true
-					game:GetService("TweenService"):Create(Button, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Button.Size.X.Scale, Button.Size.X.Offset, 0, ButtonDescription.TextBounds.Y + 40)}):Play()
+					game:GetService("TweenService"):Create(Button, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Button.Size.X.Scale, Button.Size.X.Offset, 0, ButtonDescription.TextBounds.Y + 60)}):Play()
 					game:GetService("TweenService"):Create(ButtonArrowImage, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 180}):Play()
 					game:GetService("TweenService"):Create(ButtonBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 0, 1)}):Play()
 					game:GetService("TweenService"):Create(ButtonDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()		
@@ -355,7 +355,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			LabelIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			LabelIcon.BackgroundTransparency = 1.000
 			LabelIcon.BorderSizePixel = 0
-			LabelIcon.Position = UDim2.new(1, -10, 0, 10)
+			LabelIcon.Position = UDim2.new(1, -10, 0, 7)
 			LabelIcon.Size = UDim2.new(0, 20, 0, 20)
 			LabelIcon.Image = "rbxassetid://11751508479"
 			
