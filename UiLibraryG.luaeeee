@@ -27,19 +27,19 @@ function ZoneUiLibrary:CreateWindow(Options)
 			v:Disconnect()
 		end
 	end
-	
+
 	if game:GetService("CoreGui"):FindFirstChild("Zone") then
 		game:GetService("CoreGui"):FindFirstChild("Zone"):Destroy()
 		for i,v in pairs(getgenv().Connections) do
 			v:Disconnect()
 		end
 	end
-	
+
 	getgenv().Connections = nil
 	getgenv().Connections = {}
-	
+
 	Options = Validate({Name = "Zone"}, Options or {})
-	
+
 	local Zone = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
 	local DropShadowHolder = Instance.new("Frame")
@@ -132,7 +132,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 	TabHolderPadding.Parent = TabHolder
 	TabHolderPadding.PaddingBottom = UDim.new(0, 10)
 	TabHolderPadding.PaddingTop = UDim.new(0, 10)
-	
+
 	getgenv().Connections[#getgenv().Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
 		if not game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("Zone") and not game:GetService("CoreGui"):FindFirstChild("Zone") then
 			Zone:Destroy()
@@ -142,11 +142,11 @@ function ZoneUiLibrary:CreateWindow(Options)
 			getgenv().Connections = nil
 		end
 	end)
-	
+
 	getgenv().Connections[#getgenv().Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
 		ResizeCanvasSize(Explorer, ExplorerListlayout)
 	end)
-	
+
 	local Tabs = {}
 
 	function Tabs:CreateTab(Options)
@@ -236,7 +236,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 				end
 			end
 		end)
-		
+
 		getgenv().Connections[#getgenv().Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
 			ResizeCanvasSize(Tab, TabListlayout)
 		end)
@@ -436,23 +436,23 @@ function ZoneUiLibrary:CreateWindow(Options)
 
 			return LabelProperties
 		end
-		
+
 		function Elements:CreateSeperator()
 			local Frame = Instance.new("Frame")
-			
+
 			Frame.Name = "Frame"
 			Frame.Parent = Tab
 			Frame.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
 			Frame.BorderSizePixel = 0
 			Frame.Size = UDim2.new(1, 0, 0, 20)
 		end
-		
+
 		function Elements:CreateToggle(Options)
 			Options = Validate({Name = "Toggle", Description = "No description given.", State = false, Callback = function() end}, Options or {})
-			
+
 			local Toggled = false
 			local DescriptionToggled = false
-			
+
 			local Toggle = Instance.new("TextButton")
 			local ToggleTitle = Instance.new("TextLabel")
 			local ToggleArrow = Instance.new("TextButton")
@@ -460,7 +460,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 			local ToggleState = Instance.new("ImageLabel")
 			local ToggleDescription = Instance.new("TextLabel")
 			local ToggleBar = Instance.new("Frame")
-			
+
 			Toggle.Name = "Toggle"
 			Toggle.Parent = Tab
 			Toggle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
@@ -543,7 +543,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 			ToggleBar.BorderSizePixel = 0
 			ToggleBar.Position = UDim2.new(0.5, 0, 1, 0)
 			ToggleBar.Size = UDim2.new(0, 0, 0, 1)
-			
+
 			ToggleArrow.MouseButton1Down:Connect(function()
 				if DescriptionToggled == true then
 					DescriptionToggled = false
@@ -561,8 +561,8 @@ function ZoneUiLibrary:CreateWindow(Options)
 					game:GetService("TweenService"):Create(ToggleDescription, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()		
 				end	
 			end)
-			
-			local function toggle()
+
+			local function ewa()
 				if Toggled == true then
 					Toggled = false
 					Options["Callback"](Toggled)
@@ -575,15 +575,15 @@ function ZoneUiLibrary:CreateWindow(Options)
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 360}):Play()
 				end
 			end
-			
+
 			Toggle.MouseButton1Down:Connect(function()
-				toggle()
+				ewa()
 			end)
-			
+
 			if Options["State"] == true then
-				toggle()
+				ewa()
 			end
-			
+
 		end
 
 		return Elements
