@@ -1,5 +1,4 @@
 local ZoneUiLibrary = {}
-local Connections = {}
 
 local function Validate(Default, Options)
 	Options = Options or {}
@@ -22,8 +21,25 @@ local function ResizeCanvasSize(ScrollingFrame, UiListlayout)
 end
 
 function ZoneUiLibrary:CreateWindow(Options)
+	if game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("Zone") then
+		game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("Zone"):Destroy()
+		for i,v in pairs(getgenv().Connections) do
+			v:Disconnect()
+		end
+	end
+	
+	if game:GetService("CoreGui"):WaitForChild("Zone") then
+		game:GetService("CoreGui"):WaitForChild("Zone"):Destroy()
+		for i,v in pairs(getgenv().Connections) do
+			v:Disconnect()
+		end
+	end
+	
+	getgenv().Connections = nil
+	getgenv().Connections = {}
+	
 	Options = Validate({Name = "Zone"}, Options or {})
-
+	
 	local Zone = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
 	local DropShadowHolder = Instance.new("Frame")
@@ -117,7 +133,16 @@ function ZoneUiLibrary:CreateWindow(Options)
 	TabHolderPadding.PaddingBottom = UDim.new(0, 10)
 	TabHolderPadding.PaddingTop = UDim.new(0, 10)
 	
-	Connections[#Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
+	getgenv().Connections[#getgenv().Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
+		if Zone == nil then
+			for i,v in pairs(getgenv().Connections) do
+				v:Disconnect()
+			end
+			getgenv().Connections = nil
+		end
+	end)
+	
+	getgenv().Connections[#getgenv().Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
 		ResizeCanvasSize(Explorer, ExplorerListlayout)
 	end)
 	
@@ -211,7 +236,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 			end
 		end)
 		
-		Connections[#Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
+		getgenv().Connections[#getgenv().Connections + 1] = game:GetService("RunService").RenderStepped:Connect(function()
 			ResizeCanvasSize(Tab, TabListlayout)
 		end)
 
