@@ -464,7 +464,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 			local ToggleBar = Instance.new("Frame")
 			
 			Toggle.Name = "Toggle"
-			Toggle.Parent = game.StarterGui.Zone.Main.TabHolder.Tab
+			Toggle.Parent = Tab
 			Toggle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
 			Toggle.BorderSizePixel = 0
 			Toggle.Size = UDim2.new(1, 0, 0, 40)
@@ -482,6 +482,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 			ToggleTitle.Position = UDim2.new(0, 10, 0, 10)
 			ToggleTitle.Size = UDim2.new(0.5, 100, 0, 20)
 			ToggleTitle.Font = Enum.Font.Ubuntu
+			ToggleTitle.Text = Options["Name"]
 			ToggleTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			ToggleTitle.TextSize = 14.000
 			ToggleTitle.TextWrapped = true
@@ -531,7 +532,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 			ToggleDescription.Position = UDim2.new(0.5, 0, 1, -10)
 			ToggleDescription.Size = UDim2.new(1, -20, 0.5, 0)
 			ToggleDescription.Font = Enum.Font.Ubuntu
-			ToggleDescription.Text = "No description given."
+			ToggleDescription.Text = Options["Description"]
 			ToggleDescription.TextColor3 = Color3.fromRGB(168, 168, 168)
 			ToggleDescription.TextSize = 20.000
 			ToggleDescription.TextTransparency = 1.000
@@ -563,7 +564,7 @@ function ZoneUiLibrary:CreateWindow(Options)
 				end	
 			end)
 			
-			Toggle.MouseButton1Down:Connect(function()
+			local function toggle()
 				if Toggled then
 					Toggled = false
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(255, 63, 63)}):Play()
@@ -574,7 +575,15 @@ function ZoneUiLibrary:CreateWindow(Options)
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageColor3 = Color3.fromRGB(63, 255, 63)}):Play()
 					game:GetService("TweenService"):Create(ToggleState, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 360}):Play()
 				end
+			end
+			
+			Toggle.MouseButton1Down:Connect(function()
+				toggle()
 			end)
+			
+			if Options["State"] then
+				toggle()
+			end
 			
 		end
 
