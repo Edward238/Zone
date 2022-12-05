@@ -170,6 +170,7 @@ function ZoneUiLibrary:CreateWindow(options)
 		TabListlayout.Parent = Tab
 		TabListlayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 		TabListlayout.SortOrder = Enum.SortOrder.LayoutOrder
+		TabListlayout.Padding = UDim.new(0, 8)
 
 		TabPadding.Name = "TabPadding"
 		TabPadding.Parent = Tab
