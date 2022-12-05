@@ -346,6 +346,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			LabelText.Text = options["Message"]
 			LabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
 			LabelText.TextSize = 14.000
+			LabelText.TextWrapped = true
 			LabelText.TextXAlignment = Enum.TextXAlignment.Left
 
 			LabelIcon.Name = "LabelIcon"
@@ -366,7 +367,7 @@ function ZoneUiLibrary:CreateWindow(options)
 
 				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, math.huge)
 				LabelText.Size = UDim2.new(LabelText.Size.X.Scale, LabelText.Size.X.Offset, 0, LabelText.TextBounds.Y)
-				--game:GetService("TweenService"):Create(Label, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Label.Size.X.Scale, Label.Size.X.Offset, 0, LabelText.TextBounds.Y + 20)}):Play()
+				game:GetService("TweenService"):Create(Label, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Label.Size.X.Scale, Label.Size.X.Offset, 0, LabelText.TextBounds.Y + 20)}):Play()
 			end
 			
 			ChangeTextToNewText()
