@@ -12,7 +12,7 @@ end
 
 function ZoneUiLibrary:CreateWindow(options)
 	options = ZoneUiLibrary:Validate({Name = "Zone"}, options or {})
-	
+
 	local Zone = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
 	local DropShadowHolder = Instance.new("Frame")
@@ -23,7 +23,7 @@ function ZoneUiLibrary:CreateWindow(options)
 	local ExplorerListlayout = Instance.new("UIListLayout")
 	local TabHolder = Instance.new("Frame")
 	local TabHolderPadding = Instance.new("UIPadding")
-	
+
 	Zone.Name = "Zone"
 	Zone.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -86,11 +86,11 @@ function ZoneUiLibrary:CreateWindow(options)
 	Explorer.Position = UDim2.new(0.5, 0, 0, 60)
 	Explorer.Size = UDim2.new(1, 0, 1, -70)
 	Explorer.ScrollBarThickness = 0
-	
+
 	ExplorerListlayout.Name = "ExplorerListlayout"
 	ExplorerListlayout.Parent = Explorer
 	ExplorerListlayout.SortOrder = Enum.SortOrder.LayoutOrder
-	
+
 	TabHolder.Name = "TabHolder"
 	TabHolder.Parent = Main
 	TabHolder.AnchorPoint = Vector2.new(1, 0)
@@ -105,19 +105,19 @@ function ZoneUiLibrary:CreateWindow(options)
 	TabHolderPadding.Parent = TabHolder
 	TabHolderPadding.PaddingBottom = UDim.new(0, 10)
 	TabHolderPadding.PaddingTop = UDim.new(0, 10)
-	
+
 	local Tabs = {}
-	
+
 	function Tabs:CreateTab(options)
 		options = ZoneUiLibrary:Validate({Name = "Tab Name", Icon = "rbxassetid://11749319400"}, options or {})
-		
+
 		local TabButton = Instance.new("TextButton")
 		local TabIcon = Instance.new("ImageLabel")
 		local TabTitle = Instance.new("TextLabel")
 		local Tab = Instance.new("ScrollingFrame")
 		local TabListlayout = Instance.new("UIListLayout")
 		local TabPadding = Instance.new("UIPadding")
-		
+
 		TabButton.Name = "TabButton"
 		TabButton.Parent = Explorer
 		TabButton.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
@@ -154,7 +154,7 @@ function ZoneUiLibrary:CreateWindow(options)
 		TabTitle.TextColor3 = Color3.fromRGB(115, 115, 115)
 		TabTitle.TextSize = 15.000
 		TabTitle.TextXAlignment = Enum.TextXAlignment.Left
-		
+
 		Tab.Name = "Tab"
 		Tab.Parent = TabHolder
 		Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -165,7 +165,7 @@ function ZoneUiLibrary:CreateWindow(options)
 		Tab.Size = UDim2.new(1, 0, 1, 0)
 		Tab.Visible = false
 		Tab.ScrollBarThickness = 0
-		
+
 		TabListlayout.Name = "TabListlayout"
 		TabListlayout.Parent = Tab
 		TabListlayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -175,7 +175,7 @@ function ZoneUiLibrary:CreateWindow(options)
 		TabPadding.Parent = Tab
 		TabPadding.PaddingLeft = UDim.new(0, 10)
 		TabPadding.PaddingRight = UDim.new(0, 10)
-		
+
 		TabButton.MouseButton1Down:Connect(function()
 			for i,v in pairs(TabHolder:GetChildren()) do
 				if v:IsA("ScrollingFrame") and v.Name == "Tab" then
@@ -194,21 +194,21 @@ function ZoneUiLibrary:CreateWindow(options)
 				end
 			end
 		end)
-		
+
 		local Elements = {}
-		
+
 		function Elements:CreateButton(options)
 			options = ZoneUiLibrary:Validate({Name = "Button", Description = "No description given."}, options or {})
-			
+
 			local DescriptionToggled = false
-			
+
 			local Button = Instance.new("TextButton")
 			local ButtonTitle = Instance.new("TextLabel")
 			local ButtonArrow = Instance.new("TextButton")
 			local ButtonArrowImage = Instance.new("ImageLabel")
 			local ButtonBar = Instance.new("Frame")
 			local ButtonDescription = Instance.new("TextLabel")
-			
+
 			Button.Name = "Button"
 			Button.Parent = Tab
 			Button.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
@@ -228,6 +228,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			ButtonTitle.Position = UDim2.new(0, 10, 0, 10)
 			ButtonTitle.Size = UDim2.new(0.5, 175, 0, 20)
 			ButtonTitle.Font = Enum.Font.Ubuntu
+			ButtonTitle.Text = options["Name"]
 			ButtonTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			ButtonTitle.TextSize = 14.000
 			ButtonTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -263,7 +264,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			ButtonBar.BorderSizePixel = 0
 			ButtonBar.Position = UDim2.new(0.5, 0, 1, 0)
 			ButtonBar.Size = UDim2.new(0, 0, 0, 1)
-			
+
 			ButtonDescription.Name = "ButtonDescription"
 			ButtonDescription.Parent = Button
 			ButtonDescription.AnchorPoint = Vector2.new(0.5, 1)
@@ -278,7 +279,7 @@ function ZoneUiLibrary:CreateWindow(options)
 			ButtonDescription.TextSize = 20.000
 			ButtonDescription.TextTransparency = 1.000
 			ButtonDescription.TextWrapped = true
-			
+
 			ButtonArrow.MouseButton1Down:Connect(function()
 				if DescriptionToggled then
 					DescriptionToggled = false
@@ -295,10 +296,10 @@ function ZoneUiLibrary:CreateWindow(options)
 				end	
 			end)
 		end
-		
+
 		return Elements
 	end
-	
+
 	return Tabs
 end
 
