@@ -317,6 +317,21 @@ function ZoneUiLibrary:CreateWindow(options)
 			end)
 
 			Tab.CanvasSize = UDim2.new(0, 0, 0, TabListlayout.AbsoluteContentSize.Y)
+			
+			local ButtonProperties = {}
+			
+			function ButtonProperties:SetText(NewMessage)
+				options["Description"] = NewMessage or options["Description"]
+				ButtonDescription = options["Description"]
+				
+				if DescriptionToggled == true then
+					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, math.huge)
+					ButtonDescription.Size = UDim2.new(ButtonDescription.Size.X.Scale, ButtonDescription.Size.X.Offset, 0, ButtonDescription.TextBounds.Y)
+					game:GetService("TweenService"):Create(Button, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(Button.Size.X.Scale, Button.Size.X.Offset, 0, ButtonDescription.TextBounds.Y + 60)}):Play()
+				end
+			end
+			
+			return ButtonProperties
 		end
 
 		function Elements:CreateLabel(options) 
